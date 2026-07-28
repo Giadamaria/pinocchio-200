@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinocchio — 01 Desire to Become a Father</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512;
+    --paper:#fbf9f4;
+    --red:#cf3a24;
+    --gray:#8c8a86;
+    --line:#171512;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    position:relative;
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Grandstander', sans-serif;
+    font-weight:500;
+    overflow-x:hidden;
+  }
+  .display{ font-family:'Grandstander', sans-serif; }
+
+  main{
+    position:relative;
+    z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    padding:1.6rem 1.4rem 5rem;
+  }
+
+  /* ---------- header: centered wordmark ---------- */
+  .brand{
+    text-align:center;
+    margin-bottom:1.8rem;
+  }
+  .brand .wordmark{
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:normal;
+  }
+  .brand .wordmark .two-hundred{ color:var(--red); }
+
+  /* ---------- decorative elements (hat + book), scroll with the page ---------- */
+  .deco-hat{
+    position:absolute;
+    top:-10px; left:-8px;
+    width:min(26vw, 130px);
+    z-index:0;
+    pointer-events:none;
+    transform-origin:70% 15%;
+    animation:sway 6s ease-in-out infinite;
+  }
+  .deco-hat img{ width:100%; height:auto; display:block; }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-2deg); }
+    50%{ transform:rotate(2deg); }
+  }
+
+  .deco-book{
+    position:absolute;
+    bottom:0; right:-10px;
+    width:min(20vw, 100px);
+    z-index:0;
+    pointer-events:none;
+    transform-origin:50% 100%;
+    animation:bob 5s ease-in-out infinite;
+  }
+  .deco-book img{ width:100%; height:auto; display:block; }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .deco-hat, .deco-book{ animation:none; }
+  }
+
+  /* ---------- progress dots ---------- */
+  .progress{
+    display:flex;
+    align-items:center;
+    margin-bottom:2.4rem;
+  }
+  .progress .dot{
+    width:14px; height:14px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    flex-shrink:0;
+  }
+  .progress .dot.active{
+    width:34px; height:34px;
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:0;
+  }
+  .progress .dot.active span{
+    display:block;
+    transform:translateY(1px);
+  }
+  .progress .seg{
+    flex:1;
+    height:2px;
+    background:var(--ink);
+    opacity:.5;
+    margin:0 6px;
+  }
+
+  /* ---------- title + scroll hint ---------- */
+  .kicker-title{ text-align:center; margin-bottom:2.4rem; }
+  .kicker-title h1{
+    font-family:'Grandstander', sans-serif;
+    font-weight:800;
+    font-size:clamp(1.9rem, 6vw, 3rem);
+    line-height:1.08;
+    text-transform:uppercase;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .scroll-hint{
+    margin-top:1.6rem;
+    color:var(--gray);
+    font-family:'Grandstander', sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+  }
+  .scroll-hint .arrow{
+    display:block;
+    margin-top:.4rem;
+    font-size:1.2rem;
+    animation:bob 1.8s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(6px) } }
+
+  /* ---------- pill tags ---------- */
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    border:2px solid var(--ink);
+    border-radius:100px;
+    padding:.35rem 1rem;
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    background:var(--paper);
+  }
+  .tag-row{
+    display:flex;
+    margin-bottom:.9rem;
+  }
+  .tag-row.align-left{ justify-content:flex-start; }
+  .tag-row.align-right{ justify-content:flex-end; }
+
+  /* ---------- illustration block ---------- */
+  .illus{
+    position:relative;
+    width:100%;
+    border-radius:8px;
+    overflow:hidden;
+    background:#f1ede3;
+    line-height:0;
+  }
+  .illus img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  .caption{
+    text-align:center;
+    font-size:.82rem;
+    margin:.9rem 0 2.6rem;
+    color:var(--ink);
+  }
+  .caption strong{ font-weight:700; }
+
+  /* ---------- body copy ---------- */
+  .body-copy{
+    font-size:1rem;
+    line-height:1.65;
+    text-align:justify;
+    margin-bottom:2.2rem;
+  }
+  .body-copy .highlight{ color:var(--red); }
+
+  section.block{ margin-bottom:1rem; }
+
+  footer{
+    text-align:center;
+    font-family:'Grandstander', sans-serif;
+    font-size:.75rem;
+    color:var(--gray);
+    padding-top:2rem;
+    border-top:1px dashed rgba(23,21,18,.25);
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="deco-hat" aria-hidden="true">
+    <img src="../assets/cappello.png" alt="">
+  </div>
+
+  <div class="deco-book" aria-hidden="true">
+    <img src="../assets/libro.png" alt="">
+  </div>
+
+  <div class="brand">
+    <span class="wordmark">PINOCCHIO <span class="two-hundred">200</span></span>
+  </div>
+
+  <div class="progress">
+    <div class="dot active"><span>1</span></div>
+    <div class="seg"></div>
+    <div class="dot"></div>
+    <div class="seg"></div>
+    <div class="dot"></div>
+    <div class="seg"></div>
+    <div class="dot"></div>
+    <div class="seg"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="kicker-title">
+    <h1>Desire to<br>Become a Father</h1>
+    <div class="scroll-hint">scroll down to read<span class="arrow">↓</span></div>
+  </div>
+
+  <section class="block">
+    <div class="tag-row align-right"><span class="tag">Loneliness</span></div>
+    <div class="tag-row align-left"><span class="tag">Sculpture</span></div>
+    <div class="illus">
+      <img src="../assets/nico-rossi-1944.png" alt="Geppetto scolpisce il burattino, mentre Pinocchio già animato afferra la parrucca, illustrazione di Nico Rossi">
+    </div>
+    <p class="caption">Illustration by <strong>Nico Rossi (1944)</strong></p>
+  </section>
+
+  <p class="body-copy">Unlike the authoritarian patriarchal models of the past, <span class="highlight">Geppetto embodies a more vulnerable, emotional, and at times powerless fatherhood</span> in the presence of the outside world.</p>
+
+  <section class="block">
+    <div class="tag-row align-right"><span class="tag">Feelings</span></div>
+    <div class="illus">
+      <img src="../assets/golpe-1961.png" alt="Geppetto intaglia il naso di Pinocchio in controluce, illustrazione di Golpe">
+    </div>
+    <p class="caption">Illustration by <strong>Golpe (1961)</strong></p>
+  </section>
+
+  <p class="body-copy">This "fragility" of the father is a much-debated topic in the sociology of the modern family.</p>
+
+  <section class="block">
+    <div class="tag-row align-left"><span class="tag">Heritage</span></div>
+    <div class="illus">
+      <img src="../assets/talani-2016.png" alt="Pinocchio di legno e un bambino a confronto, illustrazione di Giampaolo Talani">
+    </div>
+    <p class="caption">Illustration by <strong>Giampaolo Talani, De Paoli (2016)</strong></p>
+  </section>
+
+  <footer>Pinocchio — approfondimento 01 / 05 · pagina statica, pronta per QR code fisso</footer>
+
+</main>
+</body>
+</html>
