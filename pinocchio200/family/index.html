@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pinocchio — 04 Courage for the Family</title>
+<title>Pinocchio — 01 Desire to Become a Father</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
@@ -48,12 +48,11 @@
   }
   .brand .wordmark .two-hundred{ color:var(--red); }
 
-  /* ---------- decorative elements, scroll with the page ---------- */
-  /* top-left: sedia (continues from exchange's bottom element) */
+  /* ---------- decorative elements (hat + book), scroll with the page ---------- */
   .deco-hat{
     position:absolute;
-    top:-16px; left:-14px;
-    width:min(20vw, 104px);
+    top:-22px; left:-14px;
+    width:min(18vw, 92px);
     z-index:0;
     pointer-events:none;
     transform-origin:70% 15%;
@@ -65,18 +64,17 @@
     50%{ transform:rotate(2deg); }
   }
 
-  /* bottom-right: attrezzi (toolbox), becomes next page's top element */
   .deco-book{
     position:absolute;
-    bottom:0; right:-14px;
-    width:min(22vw, 116px);
+    bottom:0; right:-10px;
+    width:min(20vw, 100px);
     z-index:0;
     pointer-events:none;
     transform-origin:50% 100%;
-    animation:bobfloat 5s ease-in-out infinite;
+    animation:bob 5s ease-in-out infinite;
   }
   .deco-book img{ width:100%; height:auto; display:block; }
-  @keyframes bobfloat{
+  @keyframes bob{
     0%,100%{ transform:translateY(0); }
     50%{ transform:translateY(-6px); }
   }
@@ -85,7 +83,7 @@
     .deco-hat, .deco-book{ animation:none; }
   }
 
-  /* ---------- progress dots (clickable) ---------- */
+  /* ---------- progress dots ---------- */
   .progress{
     display:flex;
     align-items:center;
@@ -154,9 +152,9 @@
     display:block;
     margin-top:.4rem;
     font-size:1.2rem;
-    animation:arrowbob 1.8s ease-in-out infinite;
+    animation:bob 1.8s ease-in-out infinite;
   }
-  @keyframes arrowbob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(6px) } }
+  @keyframes bob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(6px) } }
 
   /* ---------- pill tags ---------- */
   .tag{
@@ -176,7 +174,6 @@
     display:flex;
     margin-bottom:.9rem;
   }
-  .tag-row.after{ margin-top:.9rem; margin-bottom:0; }
   .tag-row.align-left{ justify-content:flex-start; }
   .tag-row.align-right{ justify-content:flex-end; }
 
@@ -259,11 +256,11 @@
 <main>
 
   <div class="deco-hat" aria-hidden="true">
-    <img src="../assets/sedia.png" alt="">
+    <img src="../assets/cappello.png" alt="">
   </div>
 
   <div class="deco-book" aria-hidden="true">
-    <img src="../assets/attrezzi.png" alt="">
+    <img src="../assets/libro.png" alt="">
   </div>
 
   <div class="brand">
@@ -271,61 +268,52 @@
   </div>
 
   <div class="progress">
-    <a href="../father/" class="dot" aria-label="Fase 1 · Desire to Become a Father"></a>
+    <div class="dot active"><span>1</span></div>
     <div class="seg"></div>
     <a href="../discovery/" class="dot" aria-label="Fase 2 · Discovery of Ourselves"></a>
     <div class="seg"></div>
     <a href="../exchange/" class="dot" aria-label="Fase 3 · Experiences of Exchange"></a>
     <div class="seg"></div>
-    <div class="dot active"><span>4</span></div>
+    <a href="../family/" class="dot" aria-label="Fase 4 · Courage for the Family"></a>
     <div class="seg"></div>
     <a href="../future/" class="dot" aria-label="Fase 5 · Build Their Own Future"></a>
   </div>
 
   <div class="kicker-title">
-    <h1>Courage for<br>the Family</h1>
+    <h1>Desire to<br>Become a Father</h1>
     <div class="scroll-hint">scroll down to read<span class="arrow">↓</span></div>
   </div>
 
   <section class="block">
-    <div class="tag-row align-right"><span class="tag">Sacrifice</span></div>
+    <div class="tag-row align-right"><span class="tag">Loneliness</span></div>
+    <div class="tag-row align-left"><span class="tag">Sculpture</span></div>
     <div class="illus">
-      <img src="../assets/baraldi-1993.png" alt="Mangiafuoco seduto con il burattino Pinocchio e Arlecchino accanto, illustrazione di Severino Baraldi">
+      <img src="../assets/nico-rossi-1944.png" alt="Geppetto scolpisce il burattino, mentre Pinocchio già animato afferra la parrucca, illustrazione di Nico Rossi">
     </div>
-    <div class="tag-row align-left after"><span class="tag">Action</span></div>
-    <p class="caption">Illustration by <strong>Severino Baraldi (1993)</strong></p>
+    <p class="caption">Illustration by <strong>Nico Rossi (1944)</strong></p>
   </section>
 
-  <p class="body-copy">At first, Pinocchio thinks mainly of himself and seeks only fun, without worrying about the consequences of his actions. Over time, however, he begins to understand <span class="highlight">the value of sacrifice for the good of others</span>.</p>
+  <p class="body-copy">Unlike the authoritarian patriarchal models of the past, <span class="highlight">Geppetto embodies a more vulnerable, emotional, and at times powerless fatherhood</span> in the presence of the outside world.</p>
 
   <section class="block">
+    <div class="tag-row align-right"><span class="tag">Feelings</span></div>
     <div class="illus">
-      <img src="../assets/ceccoli-2001-marionette.png" alt="Un volto enorme regge i fili di due burattini, illustrazione di Nicoletta Ceccoli">
+      <img src="../assets/golpe-1961.png" alt="Geppetto intaglia il naso di Pinocchio in controluce, illustrazione di Golpe">
     </div>
-    <p class="caption">Illustration by <strong>Nicoletta Ceccoli (2001)</strong></p>
+    <p class="caption">Illustration by <strong>Golpe (1961)</strong></p>
   </section>
 
-  <p class="body-copy">A significant example is when he allows himself to be eaten by the shark in order to save Geppetto.</p>
+  <p class="body-copy">This "fragility" of the father is a much-debated topic in the sociology of the modern family.</p>
 
   <section class="block">
-    <div class="tag-row align-left"><span class="tag">Love</span></div>
+    <div class="tag-row align-left"><span class="tag">Heritage</span></div>
     <div class="illus">
-      <img src="../assets/cassinelli-1981.png" alt="Un grande pesce verde inghiotte Pinocchio tra le onde, illustrazione di Attilio Cassinelli">
+      <img src="../assets/talani-2016.png" alt="Pinocchio di legno e un bambino a confronto, illustrazione di Giampaolo Talani">
     </div>
-    <p class="caption">Illustration by <strong>Attilio Cassinelli (1981)</strong></p>
+    <p class="caption">Illustration by <strong>Giampaolo Talani, De Paoli (2016)</strong></p>
   </section>
 
-  <p class="body-copy">Through these experiences, Pinocchio understands that growing up also means making difficult choices, putting aside one's desires, and <span class="highlight">taking responsibility for the good of those one loves</span>.</p>
-
-  <section class="block">
-    <div class="tag-row align-left"><span class="tag">Brave</span></div>
-    <div class="illus">
-      <img src="../assets/degaspari-1966.png" alt="Una capra e Pinocchio su uno scoglio davanti alla bocca spalancata di un pescecane, illustrazione di Giorgio De Gaspari">
-    </div>
-    <p class="caption">Illustration by <strong>Giorgio De Gaspari (1966)</strong></p>
-  </section>
-
-  <footer>Pinocchio — approfondimento 04 / 05 · pagina statica, pronta per QR code fisso</footer>
+  <footer>Pinocchio — approfondimento 01 / 05 · pagina statica, pronta per QR code fisso</footer>
 
 </main>
 
