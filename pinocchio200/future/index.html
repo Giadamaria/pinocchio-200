@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinocchio — 05 Build Their Own Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512;
+    --paper:#fbf9f4;
+    --red:#cf3a24;
+    --gray:#8c8a86;
+    --line:#171512;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    position:relative;
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Grandstander', sans-serif;
+    font-weight:500;
+    overflow-x:hidden;
+  }
+  .display{ font-family:'Grandstander', sans-serif; }
+
+  main{
+    position:relative;
+    z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    padding:1.6rem 1.4rem 5rem;
+  }
+
+  /* ---------- header: centered wordmark ---------- */
+  .brand{
+    text-align:center;
+    margin-bottom:1.8rem;
+  }
+  .brand .wordmark{
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:normal;
+  }
+  .brand .wordmark .two-hundred{ color:var(--red); }
+
+  /* ---------- decorative elements, scroll with the page ---------- */
+  /* top-left: attrezzi (continues from family's bottom element) */
+  .deco-hat{
+    position:absolute;
+    top:-14px; left:-14px;
+    width:min(20vw, 104px);
+    z-index:0;
+    pointer-events:none;
+    transform-origin:70% 15%;
+    animation:sway 6s ease-in-out infinite;
+  }
+  .deco-hat img{ width:100%; height:auto; display:block; }
+  @keyframes sway{
+    0%,100%{ transform:rotate(-2deg); }
+    50%{ transform:rotate(2deg); }
+  }
+
+  /* bottom-right: cappello, closes the loop back to phase 1 */
+  .deco-book{
+    position:absolute;
+    bottom:0; right:-10px;
+    width:min(18vw, 92px);
+    z-index:0;
+    pointer-events:none;
+    transform-origin:50% 100%;
+    animation:bobfloat 5s ease-in-out infinite;
+  }
+  .deco-book img{ width:100%; height:auto; display:block; }
+  @keyframes bobfloat{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .deco-hat, .deco-book{ animation:none; }
+  }
+
+  /* ---------- progress dots (clickable) ---------- */
+  .progress{
+    display:flex;
+    align-items:center;
+    margin-bottom:2.4rem;
+  }
+  .progress .dot{
+    width:14px; height:14px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    flex-shrink:0;
+  }
+  .progress a.dot{
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .progress a.dot:hover{
+    background:var(--ink);
+    transform:scale(1.15);
+  }
+  .progress .dot.active{
+    width:34px; height:34px;
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:0;
+  }
+  .progress .dot.active span{
+    display:block;
+    transform:translateY(1px);
+  }
+  .progress .seg{
+    flex:1;
+    height:2px;
+    background:var(--ink);
+    opacity:.5;
+    margin:0 6px;
+  }
+
+  /* ---------- title + scroll hint ---------- */
+  .kicker-title{ text-align:center; margin-bottom:2.4rem; }
+  .kicker-title h1{
+    font-family:'Grandstander', sans-serif;
+    font-weight:800;
+    font-size:clamp(1.9rem, 6vw, 3rem);
+    line-height:1.08;
+    text-transform:uppercase;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .scroll-hint{
+    margin-top:1.6rem;
+    color:var(--gray);
+    font-family:'Grandstander', sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+  }
+  .scroll-hint .arrow{
+    display:block;
+    margin-top:.4rem;
+    font-size:1.2rem;
+    animation:arrowbob 1.8s ease-in-out infinite;
+  }
+  @keyframes arrowbob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(6px) } }
+
+  /* ---------- pill tags ---------- */
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    border:2px solid var(--ink);
+    border-radius:100px;
+    padding:.35rem 1rem;
+    font-family:'Grandstander', sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    background:var(--paper);
+  }
+  .tag-row{
+    display:flex;
+    margin-bottom:.9rem;
+  }
+  .tag-row.after{ margin-top:.9rem; margin-bottom:0; }
+  .tag-row.align-left{ justify-content:flex-start; }
+  .tag-row.align-right{ justify-content:flex-end; }
+
+  /* ---------- illustration block ---------- */
+  .illus{
+    position:relative;
+    width:100%;
+    border-radius:8px;
+    overflow:hidden;
+    background:#f1ede3;
+    line-height:0;
+  }
+  .illus img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .illus.placeholder{
+    aspect-ratio:1 / 1;
+    border:2px dashed var(--ink);
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(23,21,18,.04) 0 10px,
+        transparent 10px 20px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:1.5rem;
+  }
+  .illus.placeholder .placeholder-copy{
+    font-family:'Grandstander', sans-serif;
+    font-size:.8rem;
+    color:var(--gray);
+    line-height:1.5;
+  }
+  .illus.placeholder .placeholder-copy strong{ color:var(--ink); display:block; margin-bottom:.3rem; }
+
+  .caption{
+    text-align:center;
+    font-size:.82rem;
+    margin:.9rem 0 2.6rem;
+    color:var(--ink);
+  }
+  .caption strong{ font-weight:700; }
+
+  /* ---------- body copy ---------- */
+  .body-copy{
+    font-size:1rem;
+    line-height:1.65;
+    text-align:justify;
+    margin-bottom:2.2rem;
+  }
+  .body-copy .highlight{ color:var(--red); }
+
+  section.block{ margin-bottom:1rem; }
+
+  /* ---------- closing / colophon ---------- */
+  .the-end{
+    display:flex;
+    align-items:center;
+    gap:.9rem;
+    margin-top:3rem;
+    padding-top:2rem;
+    border-top:1px dashed rgba(23,21,18,.25);
+  }
+  .the-end img{ width:56px; height:auto; flex-shrink:0; }
+  .the-end .the-end-text{
+    font-weight:700;
+    color:var(--red);
+    line-height:1.3;
+    text-transform:uppercase;
+    font-size:1.05rem;
+  }
+
+  .credits{
+    margin-top:2rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.1rem;
+  }
+  .credits .credit-row .label{
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gray);
+  }
+  .credits .credit-row .name{
+    font-weight:700;
+    font-size:1rem;
+    margin-top:.15rem;
+  }
+
+  footer{
+    text-align:center;
+    font-family:'Grandstander', sans-serif;
+    font-size:.75rem;
+    color:var(--gray);
+    padding-top:2rem;
+    margin-top:2rem;
+    border-top:1px dashed rgba(23,21,18,.25);
+  }
+
+  /* ---------- scroll-to-top button ---------- */
+  .scroll-top-btn{
+    position:fixed;
+    left:50%;
+    bottom:1.6rem;
+    transform:translateX(-50%) translateY(20px);
+    width:50px; height:50px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem;
+    line-height:1;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    z-index:20;
+    box-shadow:0 6px 18px rgba(23,21,18,.28);
+  }
+  .scroll-top-btn.visible{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(-50%) translateY(0);
+  }
+  .scroll-top-btn:hover{ background:var(--red); }
+  @media (prefers-reduced-motion: reduce){
+    .scroll-top-btn{ transition:opacity .1s linear; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="deco-hat" aria-hidden="true">
+    <img src="../assets/attrezzi.png" alt="">
+  </div>
+
+  <div class="deco-book" aria-hidden="true">
+    <img src="../assets/cappello.png" alt="">
+  </div>
+
+  <div class="brand">
+    <span class="wordmark">PINOCCHIO <span class="two-hundred">200</span></span>
+  </div>
+
+  <div class="progress">
+    <a href="../father/" class="dot" aria-label="Fase 1 · Desire to Become a Father"></a>
+    <div class="seg"></div>
+    <a href="../discovery/" class="dot" aria-label="Fase 2 · Discovery of Ourselves"></a>
+    <div class="seg"></div>
+    <a href="../exchange/" class="dot" aria-label="Fase 3 · Experiences of Exchange"></a>
+    <div class="seg"></div>
+    <a href="../family/" class="dot" aria-label="Fase 4 · Courage for the Family"></a>
+    <div class="seg"></div>
+    <div class="dot active"><span>5</span></div>
+  </div>
+
+  <div class="kicker-title">
+    <h1>Build Their<br>Own Future</h1>
+    <div class="scroll-hint">scroll down to read<span class="arrow">↓</span></div>
+  </div>
+
+  <section class="block">
+    <div class="tag-row align-left"><span class="tag">Family</span></div>
+    <div class="illus">
+      <img src="../assets/montelli-2000.png" alt="Geppetto seduto sul dorso di un enorme pesce, illustrazione di Giancarlo Montelli">
+    </div>
+    <p class="caption">Illustration by <strong>Giancarlo Montelli (2000)</strong></p>
+  </section>
+
+  <p class="body-copy">After many adventures, Pinocchio realizes that his path is deeply linked to that of Geppetto, <span class="highlight">who believed in him and his future from the very beginning</span>.</p>
+
+  <section class="block">
+    <div class="tag-row align-right"><span class="tag">Help</span></div>
+    <div class="illus">
+      <img src="../assets/bentivegna-2011-help.png" alt="Composizione astratta di forme rosse, nere e dorate, illustrazione di Maurizio Bentivegna">
+    </div>
+    <p class="caption">Illustration by <strong>Maurizio Bentivegna (2011)</strong></p>
+  </section>
+
+  <p class="body-copy">For this reason, he decides to study, work, and help his father, repaying him for the love and care he has received.</p>
+
+  <section class="block">
+    <div class="tag-row align-left"><span class="tag">Light</span></div>
+    <div class="illus">
+      <img src="../assets/bentivegna-2011-light.png" alt="Sequenza evolutiva da tronco a scheletro di legno fino a burattino e infine bambino, illustrazione di Maurizio Bentivegna">
+    </div>
+    <p class="caption">Illustration by <strong>Maurizio Bentivegna (2011)</strong></p>
+  </section>
+
+  <p class="body-copy">He does not grow up because he becomes perfect or always obedient, but because he becomes aware of his choices and their consequences.</p>
+
+  <section class="block">
+    <div class="illus">
+      <img src="../assets/faorzi-1934.png" alt="Un ragazzo osserva un burattino disteso su una poltrona verde, illustrazione di Fiorenzo Faorzi">
+    </div>
+    <p class="caption">Illustration by <strong>Fiorenzo Faorzi (1934 – 35)</strong></p>
+  </section>
+
+  <p class="body-copy">Through <span class="highlight">emotions, mistakes, and responsibilities</span>, he learns that becoming truly "human" means <span class="highlight">accepting the truth of one's actions</span> and building, day after day, <span class="highlight">a better future for oneself and for those one loves</span>.</p>
+
+  <section class="block">
+    <div class="tag-row align-right"><span class="tag">Together</span></div>
+    <div class="illus">
+      <img src="../assets/baraldi-1993-together.png" alt="Geppetto anziano accanto al bambino Pinocchio seduto, con il burattino ormai inerte su una sedia, illustrazione di Severino Baraldi">
+    </div>
+    <p class="caption">Illustration by <strong>Severino Baraldi (1993)</strong></p>
+  </section>
+
+  <div class="the-end">
+    <img src="../assets/cappello.png" alt="">
+    <div class="the-end-text">The End<br>of Collodi's story</div>
+  </div>
+
+  <div class="credits">
+    <div class="credit-row">
+      <div class="label">Original story</div>
+      <div class="name">Carlo Collodi</div>
+    </div>
+    <div class="credit-row">
+      <div class="label">Curator and adaptation</div>
+      <div class="name">Giadamaria Battiato</div>
+    </div>
+    <div class="credit-row">
+      <div class="label">Research</div>
+      <div class="name">Alessandro Geranzani</div>
+    </div>
+    <div class="credit-row">
+      <div class="label">Direction</div>
+      <div class="name">Luca Fois</div>
+    </div>
+  </div>
+
+  <footer>Pinocchio — approfondimento 05 / 05 · pagina statica, pronta per QR code fisso</footer>
+
+</main>
+
+<button class="scroll-top-btn" id="scroll-top-btn" aria-label="Torna in cima">↑</button>
+
+<script>
+(function(){
+  const btn = document.getElementById('scroll-top-btn');
+  function toggleBtn(){
+    if(window.scrollY > window.innerHeight * 0.6){ btn.classList.add('visible'); }
+    else{ btn.classList.remove('visible'); }
+  }
+  window.addEventListener('scroll', toggleBtn, { passive:true });
+  toggleBtn();
+  btn.addEventListener('click', ()=>{
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
