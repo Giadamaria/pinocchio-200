@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Becoming Human</title>
+<title>Pinocchio 200</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -19,50 +19,43 @@
     text-align:center;
     padding:2rem;
   }
-  .eyebrow{
-    font-size:.8rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    opacity:.55;
-    margin-bottom:.6rem;
-  }
-  h1{ font-weight:800; font-size:clamp(2.2rem,7vw,3.4rem); margin:0 0 2.4rem; line-height:1.05; }
-  .chapters{ display:flex; flex-direction:column; gap:1rem; width:100%; max-width:360px; }
-  .chapter{
+  h1{ font-weight:800; font-size:clamp(2rem,7vw,3rem); margin:0 0 2rem; }
+  h1 .two-hundred{ color:var(--red); }
+  nav{ display:flex; flex-direction:column; gap:.9rem; width:100%; max-width:320px; }
+  nav a{
     display:block;
-    padding:1.2rem 1.4rem;
+    padding:.9rem 1.4rem;
     border:2px solid var(--ink);
-    border-radius:16px;
+    border-radius:100px;
     text-decoration:none;
     color:var(--ink);
-    text-align:left;
-    transition:transform .15s ease, background .15s ease;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    font-size:.95rem;
   }
-  .chapter:hover{ transform:translateY(-2px); background:#f1ede3; }
-  .chapter .num{ font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; opacity:.6; }
-  .chapter .title{ font-weight:700; font-size:1.2rem; margin-top:.2rem; }
-  .chapter .sub{ font-size:.85rem; opacity:.7; margin-top:.2rem; }
-  .chapter.soon{ opacity:.6; }
-  p.note{ margin-top:2.6rem; font-size:.8rem; opacity:.5; max-width:38ch; }
+  nav a:hover{ background:var(--ink); color:var(--paper); }
+  p.note{ margin-top:2.4rem; font-size:.8rem; opacity:.55; max-width:36ch; }
+  a.bridge{
+    display:inline-block;
+    margin-top:2.6rem;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--red);
+    font-size:.9rem;
+    border-bottom:2px solid var(--red);
+    padding-bottom:2px;
+  }
 </style>
 </head>
 <body>
-  <p class="eyebrow">Un progetto in due capitoli</p>
-  <h1>Becoming Human</h1>
-
-  <div class="chapters">
-    <a class="chapter" href="pinocchio200/">
-      <div class="num">Capitolo 1</div>
-      <div class="title">Pinocchio 200</div>
-      <div class="sub">Il desiderio di diventare umano, dal 1883</div>
-    </a>
-    <a class="chapter soon" href="pinorobik/">
-      <div class="num">Capitolo 2 — 2026</div>
-      <div class="title">Pino Robik</div>
-      <div class="sub">Lo stesso desiderio, in chiave contemporanea</div>
-    </a>
-  </div>
-
-  <p class="note">Due mostre, un unico filo conduttore: cosa significa, in epoche diverse, desiderare di diventare umani.</p>
+  <h1>Pinocchio <span class="two-hundred">200</span></h1>
+  <nav>
+    <a href="father/">1 · Desire to Become a Father</a>
+    <a href="discovery/">2 · Discovery of Ourselves</a>
+    <a href="exchange/">3 · Experiences of Exchange</a>
+  </nav>
+  <p class="note">Le altre fasi (bugia, bosco, scuola...) verranno aggiunte qui man mano che saranno pronte.</p>
+  <a class="bridge" href="../pinorobik/">Passa a Pino Robik →</a>
 </body>
 </html>
